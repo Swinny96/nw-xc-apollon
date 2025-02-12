@@ -1,9 +1,9 @@
-import { ThemeProvider, Box, Button, CssBaseline, Divider, FormLabel, FormControl, TextField, Typography, Stack, Card, InputAdornment } from '@mui/material/';
+import { ThemeProvider, Box, Button, CssBaseline, Divider, FormLabel, FormControl, TextField, Typography, Stack, Card, InputAdornment, IconButton } from '@mui/material/';
 import { SitemarkIcon } from './components/CustomIcons';
 import { styled } from '@mui/material/styles';
 import {enghouseTheme} from "@eds/core";
 import React from 'react';
-import { Password, LocalPhone } from '@mui/icons-material';
+import { Password, LocalPhone, Visibility, VisibilityOff } from '@mui/icons-material';
 
 const MUICard = styled(Card)(({ theme }) => ({
   display: 'flex',
@@ -41,6 +41,9 @@ function App(props: { disableCustomTheme?: boolean }) {
   const [accessCodeErrorMessage, setAccessCodeErrorMessage] = React.useState('');
   const [phoneNumberError, setPhoneNumberError] = React.useState(false);
   const [phoneNumberErrorMessage, setPhoneNumberErrorMessage] = React.useState('');
+  const [showAccessCode, setShowAccessCode] = React.useState(false);
+
+  const handleClickShowAccessCode = () => setShowAccessCode(!showAccessCode);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     if (accessCodeError || phoneNumberError) {
@@ -112,7 +115,7 @@ function App(props: { disableCustomTheme?: boolean }) {
                 error={accessCodeError}
                 helperText={accessCodeErrorMessage}
                 id="accessCode"
-                type="text"
+                type={showAccessCode ? 'text' : 'password'}
                 name="accessCode"
                 placeholder="Enter your access code"
                 autoComplete="off"
@@ -125,6 +128,17 @@ function App(props: { disableCustomTheme?: boolean }) {
                     startAdornment: (
                       <InputAdornment position="start">
                         <Password />
+                      </InputAdornment>
+                    ),
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle access code visibility"
+                          onClick={handleClickShowAccessCode}
+                          edge="end"
+                        >
+                          {showAccessCode ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
                       </InputAdornment>
                     ),
                   },
