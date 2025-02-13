@@ -107,7 +107,7 @@ function App(props: { disableCustomTheme?: boolean }) {
               flexDirection: 'column',
               width: '100%',
               gap: 3,
-            }}
+              }}
           >
             <FormControl>
               <FormLabel htmlFor="accessCode">Access Code</FormLabel>
@@ -123,25 +123,23 @@ function App(props: { disableCustomTheme?: boolean }) {
                 required
                 fullWidth
                 variant="outlined"
-                slotProps={{
-                  input: {
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <Password />
-                      </InputAdornment>
-                    ),
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle access code visibility"
-                          onClick={handleClickShowAccessCode}
-                          edge="end"
-                        >
-                          {showAccessCode ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  },
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Password />
+                    </InputAdornment>
+                  ),
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle access code visibility"
+                        onClick={handleClickShowAccessCode}
+                        edge="end"
+                      >
+                        {showAccessCode ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
                 }}
                 color={accessCodeError ? 'error' : 'primary'}
               />
@@ -160,16 +158,13 @@ function App(props: { disableCustomTheme?: boolean }) {
                 required
                 fullWidth
                 variant="outlined"
-                slotProps={{
-                  input: {
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <LocalPhone />
-                      </InputAdornment>
-                    ),
-                  },
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <LocalPhone />
+                    </InputAdornment>
+                  ),
                 }}
-                color={phoneNumberError ? 'error' : 'primary'}
               />
             </FormControl>
             <Button
@@ -177,7 +172,7 @@ function App(props: { disableCustomTheme?: boolean }) {
               fullWidth
               variant="contained"
               onClick={validateInputs}
-              sx={{ textTransform: 'none' }}
+              sx={{ textTransform: 'none', boxShadow: 'none' }}
             >
               Submit
             </Button>
