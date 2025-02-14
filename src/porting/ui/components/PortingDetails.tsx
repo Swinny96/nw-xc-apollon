@@ -15,6 +15,7 @@ const Content = styled(CardContent)(({ theme }) => ({
     alignSelf: 'center',
     alignItems: 'center',
     width: '100%',
+    height: '100%',
     padding: theme.spacing(4),
     gap: theme.spacing(4),
     margin: 'auto',
