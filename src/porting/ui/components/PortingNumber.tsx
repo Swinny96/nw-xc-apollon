@@ -32,8 +32,7 @@ function PortingNumber () {
                 </Stack>
                 <TextField id="phone-number" label="Phone Number" variant='outlined' fullWidth />
                 <Button 
-                    variant="contained" 
-                    color="primary" 
+                    variant="contained"
                     fullWidth
                     sx={{ textTransform: 'none', boxShadow: 'none' }}
                     >
