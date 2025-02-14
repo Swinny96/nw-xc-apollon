@@ -3,7 +3,6 @@ import { Button, Card, CardContent, Divider, Stack, TextField, Typography } from
 import { SitemarkIcon } from '../../../components/CustomIcons';
 
 const Item = styled(Card)(({ theme }) => ({
-    backgroundColor: '#fff',
     ...theme.typography.body2,
     padding: theme.spacing(2),
     textAlign: 'center',
@@ -24,7 +23,7 @@ const Content = styled(CardContent)(({ theme }) => ({
 
 function PortingNumber () {
     return (
-        <Item variant='outlined'>
+        <Item variant='outlined' sx={{ height: '100%' }}>
             <Content>
                 <SitemarkIcon />
                 <Stack width={'100%'} spacing={1}>

@@ -2,9 +2,9 @@ import { styled } from '@mui/material/styles';
 import { Card, CardContent, Typography } from '@mui/material/';
 import Grid from '@mui/material/Grid';
 import PortingNumber from './PortingNumber';
+import PortingDetails from './PortingDetails';
 
 const Item = styled(Card)(({ theme }) => ({
-    backgroundColor: '#fff',
     ...theme.typography.body2,
     padding: theme.spacing(2),
     textAlign: 'center',
@@ -25,16 +25,12 @@ const Content = styled(CardContent)(({ theme }) => ({
 
 function PortingPage () {
     return (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} alignItems="stretch">
             <Grid item xs={6}>
                 <PortingNumber />
             </Grid>
             <Grid item xs={6}>
-                <Item variant='outlined'>
-                    <Content>
-                        <Typography variant="h5" component="h2">xs=6</Typography>
-                    </Content>
-                </Item>
+                <PortingDetails />
             </Grid>
             <Grid item xs={12}>
                 <Item variant='outlined'>

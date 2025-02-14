@@ -25,7 +25,7 @@ const Content = styled(Container)(({ theme }) => ({
   return (
     <ThemeProvider theme={enghouseTheme}>
       <CssBaseline enableColorScheme />
-      <Content maxWidth="md" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <Content maxWidth="lg" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <Outlet />
       </Content>
       <TanStackRouterDevtools />
