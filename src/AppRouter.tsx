@@ -26,23 +26,6 @@ const MUICard = styled(Card)(({ theme }) => ({
   },
 }));
 
-const SignInContainer = styled(Stack)(({ theme }) => ({
-  height: 'calc((1 - var(--template-frame-height, 0)) * 100dvh)',
-  minHeight: '100%',
-  padding: theme.spacing(2),
-  [theme.breakpoints.up('sm')]: {
-    padding: theme.spacing(4),
-  },
-  '&::before': {
-    content: '""',
-    display: 'block',
-    position: 'absolute',
-    zIndex: -1,
-    inset: 0,
-    background: theme.palette.grey.light1,
-  },
-}));
-
 const rootRoute = createRootRoute({
   component: App,
 })
@@ -101,7 +84,7 @@ const indexRoute = createRoute({
     };
 
     return (
-      <SignInContainer direction="column" justifyContent="space-between">
+      <>
         <MUICard variant="outlined">
           <SitemarkIcon />
           <Divider />
@@ -192,7 +175,7 @@ const indexRoute = createRoute({
             </Button>
           </Box>
         </MUICard>
-      </SignInContainer>
+      </>
     )
   },
 })
