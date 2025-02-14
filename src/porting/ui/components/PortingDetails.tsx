@@ -1,5 +1,5 @@
 import { styled } from '@mui/material/styles';
-import { Card, CardContent, Divider, Stack, TextField, Typography, Paper } from '@mui/material/';
+import { Card, CardContent, Divider, Stack, Typography, Paper } from '@mui/material/';
 import { Business, Work } from '@mui/icons-material/';
 
 const Contents = styled(Card)(({ theme }) => ({
@@ -39,7 +39,6 @@ function PortingDetails () {
                     <Typography variant="body1" component="h2" color={'black'}>Details</Typography>
                     <Divider sx={{ width: '100%', margin: '0', backgroundColor: 'rgba(0, 0, 0, 0.12)' }} />
                 </Stack>
-                <TextField id="phone-number" label="Phone Number" variant='outlined' fullWidth />
                 <Stack width={'100%'} spacing={0}>
                     <Item sx={{ my: 1, mx: 'auto', p: 2, margin: 0, borderRadius: "4px 0", borderBottom: 'none' }} variant="outlined">
                         <Stack spacing={2} direction="row" sx={{ alignItems: 'center', justifyContent: 'space-between' }}>
