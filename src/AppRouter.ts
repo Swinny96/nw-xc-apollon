@@ -20,7 +20,7 @@ const indexRoute = createRoute({
 const portingRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/porting',
-  component: () => <PortingPage/>
+  component: PortingPage,
 })
 
 const routeTree = rootRoute.addChildren([indexRoute, portingRoute])

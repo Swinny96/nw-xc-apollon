@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider } from '@tanstack/react-router'
-import {appRouter} from "./AppRouter.tsx";
+import {appRouter} from "./AppRouter.ts";
 
 // Render the app
 const rootElement = document.getElementById('root')!
