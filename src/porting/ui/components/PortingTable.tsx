@@ -1,5 +1,5 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Card, CardContent, Divider, Stack, Typography, tableCellClasses, Box, Chip } from '@mui/material/';
-import { Verified, HourglassTop, TaskAlt, ReportProblem, CompareArrows, KeyboardBackspace, ArrowForward } from '@mui/icons-material/';
+import { Verified, HourglassTop, TaskAlt, ReportProblem, CompareArrows, ArrowBack, ArrowForward } from '@mui/icons-material/';
 import { styled } from '@mui/material/styles';
 
 const Contents = styled(Card)(({ theme }) => ({
@@ -49,20 +49,22 @@ const StyledTableCell = styled(TableCell)(() => ({
 }));
 
 function createData(
-  quantity: number,
-  status: number,
-  numbers: string,
-  port: string,
-  portDate: Date,
-  importExport: Date,
-  portState: string,
+    quantity: number,
+    status: string,
+    numbers: string,
+    port: string,
+    portDate: Date,
+    importExport: Date,
+    portState: string,
+    portType: string // New field to determine the arrow
 ) {
-  return { quantity, status, numbers, port, portDate, importExport, portState };
+return { quantity, status, numbers, port, portDate, importExport, portState, portType };
 }
+  
 
 const rows = [
-  createData(1, 159, '35936 / 34983', 'D012', new Date(), new Date(), 'LP'),
-  createData(2, 237, '35936 / 34983', 'D012', new Date(), new Date(), 'LP'),
+    createData(1, 'Open', '35936 / 34983', 'D012', new Date(), new Date(), 'LP', 'Outgoing'),
+    createData(2, 'Completed', '35936 / 34983', 'D013', new Date(), new Date(), 'LP', 'Incoming'),
 ];
 
 export default function PortingTable() {
@@ -84,28 +86,46 @@ export default function PortingTable() {
                     <TableHead>
                         <TableRow>
                             <StyledTableCell>#</StyledTableCell>
-                            <StyledTableCell align="right">Status</StyledTableCell>
-                            <StyledTableCell align="right">Number(s)</StyledTableCell>
-                            <StyledTableCell align="right">Port</StyledTableCell>
-                            <StyledTableCell align="right">Prot-Date</StyledTableCell>
-                            <StyledTableCell align="right">Import / Export</StyledTableCell>
-                            <StyledTableCell align="right">Prot-Status</StyledTableCell>
+                            <StyledTableCell align="center">Status</StyledTableCell>
+                            <StyledTableCell align="center">Number(s)</StyledTableCell>
+                            <StyledTableCell align="center">Port</StyledTableCell>
+                            <StyledTableCell align="center">Prot-Date</StyledTableCell>
+                            <StyledTableCell align="center">Import / Export</StyledTableCell>
+                            <StyledTableCell align="center">Prot-Status</StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                    {rows.map((row) => (
-                        <StyledTableRow key={row.quantity}>
-                            <StyledTableCell align="right">
-                                {row.quantity}
+                        {rows.map((row) => (
+                            <StyledTableRow key={row.quantity}>
+                            <StyledTableCell align="center">
+                                <Typography variant='body2'>{row.quantity}</Typography>
                             </StyledTableCell>
-                            <StyledTableCell align="right">{row.status}</StyledTableCell>
-                            <StyledTableCell align="right">{row.numbers}</StyledTableCell>
-                            <StyledTableCell align="right">{row.port}</StyledTableCell>
-                            <StyledTableCell align="right">{row.portDate.toLocaleDateString()}</StyledTableCell>
-                            <StyledTableCell align="right">{row.importExport.toLocaleDateString()}</StyledTableCell>
-                            <StyledTableCell align="right"><Chip label={row.portState} sx={{width: '100%', border: 0, borderRadius: '8px', backgroundColor: '#E9EBEC'}}/></StyledTableCell>
-                        </StyledTableRow>
-                    ))}
+                            <StyledTableCell align="center">
+                                {icons[row.status] || row.status}
+                            </StyledTableCell>
+                            <StyledTableCell align="center">
+                                <Typography variant='body2'>{row.numbers}</Typography>
+                            </StyledTableCell>
+                            <StyledTableCell align="center">
+                                {portingArrows[row.portType] && (
+                                <Stack spacing={1} direction="row" alignItems="center">
+                                    <Typography variant='body2'>{row.port}</Typography>
+                                    <Box sx={{ mx: 1 }}>{portingArrows[row.portType]}</Box>
+                                    <Typography variant='body2'>{rows.find(r => r.quantity === row.quantity + 1)?.port || ''}</Typography>
+                                </Stack>
+                                )}
+                            </StyledTableCell>
+                            <StyledTableCell align="center">
+                                <Typography variant='body2'>{row.portDate.toLocaleDateString()}</Typography>
+                            </StyledTableCell>
+                            <StyledTableCell align="center">
+                                <Typography variant='body2'>{row.importExport.toLocaleDateString()}</Typography>
+                            </StyledTableCell>
+                            <StyledTableCell align="center">
+                                <Chip label={row.portState} sx={{ width: '100%', border: 0, borderRadius: '8px', backgroundColor: '#E9EBEC' }} />
+                            </StyledTableCell>
+                            </StyledTableRow>
+                        ))}
                     </TableBody>
                 </Table>
             </TableContainer>
@@ -124,7 +144,7 @@ const icons = {
 
 const portingArrows = {
     Pair: <CompareArrows fontSize='small'/>,
-    Outgoing: <KeyboardBackspace fontSize='small'/>,
+    Outgoing: <ArrowBack fontSize='small'/>,
     Incoming: <ArrowForward fontSize='small'/>,
 }
 
@@ -143,16 +163,16 @@ function DirectionStack() {
       <Stack spacing={0.5}>
         <Stack direction="row" sx={{alignItems: 'center'}}>
             <Typography sx={{fontWeight: 'medium'}}>Status:</Typography>
-            <Item direction="row" spacing={1}>{icons.Open} <Typography>-</Typography> <Typography>Open</Typography></Item>
-            <Item direction="row" spacing={1}>{icons.Completed} <Typography>-</Typography> <Typography>Completed</Typography></Item>
-            <Item direction="row" spacing={1}>{icons.Legacy} <Typography>-</Typography> <Typography>Legacy</Typography></Item>
-            <Item direction="row" spacing={1}>{icons.Error} <Typography>-</Typography> <Typography>Error</Typography></Item>
+            <Item direction="row" spacing={1}>{icons.Open} <Typography variant='body2'>-</Typography> <Typography variant='body2'>Open</Typography></Item>
+            <Item direction="row" spacing={1}>{icons.Completed} <Typography variant='body2'>-</Typography> <Typography variant='body2'>Completed</Typography></Item>
+            <Item direction="row" spacing={1}>{icons.Legacy} <Typography variant='body2'>-</Typography> <Typography variant='body2'>Legacy</Typography></Item>
+            <Item direction="row" spacing={1}>{icons.Error} <Typography variant='body2'>-</Typography> <Typography variant='body2'>Error</Typography></Item>
         </Stack>
         <Stack direction="row" sx={{alignItems: 'center'}}>
             <Typography sx={{fontWeight: 'medium'}}>Status:</Typography>
-            <Item direction="row" spacing={1}>{portingArrows.Pair} <Typography>-</Typography> <Typography>Open</Typography></Item>
-            <Item direction="row" spacing={1}>{portingArrows.Outgoing} <Typography>-</Typography> <Typography>Open</Typography></Item>
-            <Item direction="row" spacing={1}>{portingArrows.Incoming} <Typography>-</Typography> <Typography>Open</Typography></Item>
+            <Item direction="row" spacing={1}>{portingArrows.Pair} <Typography variant='body2'>-</Typography> <Typography variant='body2'>Open</Typography></Item>
+            <Item direction="row" spacing={1}>{portingArrows.Outgoing} <Typography variant='body2'>-</Typography> <Typography variant='body2'>Open</Typography></Item>
+            <Item direction="row" spacing={1}>{portingArrows.Incoming} <Typography variant='body2'>-</Typography> <Typography variant='body2'>Open</Typography></Item>
         </Stack>
       </Stack>
     );
