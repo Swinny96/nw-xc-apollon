@@ -52,20 +52,21 @@ function createData(
     quantity: number,
     status: string,
     numbers: string,
-    port: string,
+    portFrom: string,
+    portTo: string,
     portDate: Date,
     importDate: Date,
     exportDate: Date,
     portState: string,
     portType: string // New field to determine the arrow
 ) {
-return { quantity, status, numbers, port, portDate, importDate, exportDate, portState, portType };
+return { quantity, status, numbers, portFrom, portTo, portDate, importDate, exportDate, portState, portType };
 }
   
 
 const rows = [
-    createData(1, 'Open', '35936 / 34983', 'D012', new Date(), new Date('2024-02-01'), new Date('2024-02-15'), 'LP', 'Outgoing'),
-    createData(2, 'Completed', '35936 / 34983', 'D013', new Date(), new Date('2024-02-01'), new Date('2024-02-15'), 'LP', 'Incoming'),
+    createData(1, 'Open', '35936 / 34983', 'D012', 'D012', new Date(), new Date('2024-02-01'), new Date('2024-02-15'), 'LP', 'Outgoing'),
+    createData(2, 'Completed', '35936 / 34983', 'D012', 'D012', new Date(), new Date('2024-02-01'), new Date('2024-02-15'), 'LP', 'Incoming'),
 ];
 
 export default function PortingTable() {
@@ -108,13 +109,11 @@ export default function PortingTable() {
                                 <Typography variant='body2'>{row.numbers}</Typography>
                             </StyledTableCell>
                             <StyledTableCell align="center">
-                                {portingArrows[row.portType] && (
                                 <Stack spacing={1} direction="row" alignItems="center">
-                                    <Typography variant='body2'>{row.port}</Typography>
-                                    <Box sx={{ mx: 1 }}>{portingArrows[row.portType]}</Box>
-                                    <Typography variant='body2'>{rows.find(r => r.quantity === row.quantity + 1)?.port || ''}</Typography>
+                                    <Typography variant='body2'>{row.portFrom}</Typography>
+                                    <Box sx={{ mx: 1 }}>{portingArrows.Pair}</Box>
+                                    <Typography variant='body2'>{row.portTo}</Typography>
                                 </Stack>
-                                )}
                             </StyledTableCell>
                             <StyledTableCell align="center">
                                 <Typography variant='body2'>{row.portDate.toLocaleDateString()}</Typography>
