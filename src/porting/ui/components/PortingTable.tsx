@@ -54,17 +54,18 @@ function createData(
     numbers: string,
     port: string,
     portDate: Date,
-    importExport: Date,
+    importDate: Date,
+    exportDate: Date,
     portState: string,
     portType: string // New field to determine the arrow
 ) {
-return { quantity, status, numbers, port, portDate, importExport, portState, portType };
+return { quantity, status, numbers, port, portDate, importDate, exportDate, portState, portType };
 }
   
 
 const rows = [
-    createData(1, 'Open', '35936 / 34983', 'D012', new Date(), new Date(), 'LP', 'Outgoing'),
-    createData(2, 'Completed', '35936 / 34983', 'D013', new Date(), new Date(), 'LP', 'Incoming'),
+    createData(1, 'Open', '35936 / 34983', 'D012', new Date(), new Date('2024-02-01'), new Date('2024-02-15'), 'LP', 'Outgoing'),
+    createData(2, 'Completed', '35936 / 34983', 'D013', new Date(), new Date('2024-02-01'), new Date('2024-02-15'), 'LP', 'Incoming'),
 ];
 
 export default function PortingTable() {
@@ -119,7 +120,7 @@ export default function PortingTable() {
                                 <Typography variant='body2'>{row.portDate.toLocaleDateString()}</Typography>
                             </StyledTableCell>
                             <StyledTableCell align="center">
-                                <Typography variant='body2'>{row.importExport.toLocaleDateString()}</Typography>
+                                <Typography variant='body2'>{row.importDate.toLocaleDateString()} - {row.exportDate.toLocaleDateString()}</Typography>
                             </StyledTableCell>
                             <StyledTableCell align="center">
                                 <Chip label={row.portState} sx={{ width: '100%', border: 0, borderRadius: '8px', backgroundColor: '#E9EBEC' }} />
