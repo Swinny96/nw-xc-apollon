@@ -31,9 +31,20 @@ const StyledTableCell = styled(TableCell)(() => ({
     '&:nth-of-type(even)': {
       backgroundColor: theme.palette.action.hover,
     },
-    // hide last border
-    '&:last-child td, &:last-child th': {
-      border: 0,
+    '&:last-child td': {
+        borderBottom: 'none', // Remove bottom border from last row
+    },
+    '&:first-of-type td:first-of-type': {
+        borderTopLeftRadius: '8px',
+    },
+    '&:first-of-type td:last-of-type': {
+        borderTopRightRadius: '8px',
+    },
+    '&:last-of-type td:first-of-type': {
+        borderBottomLeftRadius: '8px',
+    },
+    '&:last-of-type td:last-of-type': {
+        borderBottomRightRadius: '8px',
     },
 }));
 
@@ -62,8 +73,14 @@ export default function PortingTable() {
                 <Typography variant="body1" component="h2" color={'black'}>Porting</Typography>
                 <Divider sx={{ width: '100%', margin: '0', backgroundColor: 'rgba(0, 0, 0, 0.12)' }} />
             </Stack>
-            <TableContainer component={Box}>
-                <Table aria-label="customized table" sx={{ border: '1px solid rgba(224, 224, 224, 1)'}}>
+            <TableContainer component={Box} sx={{ border: '1px solid rgba(224, 224, 224, 1)', borderRadius: '8px', overflow: 'hidden', display: 'block'}}>
+                <Table 
+                    aria-label="customized table"
+                    sx={{ 
+                        width: '100%', 
+                        borderCollapse: 'collapse', 
+                    }}
+                >
                     <TableHead>
                         <TableRow>
                             <StyledTableCell>#</StyledTableCell>
@@ -78,7 +95,7 @@ export default function PortingTable() {
                     <TableBody>
                     {rows.map((row) => (
                         <StyledTableRow key={row.quantity}>
-                            <StyledTableCell component="th" scope="row">
+                            <StyledTableCell align="right">
                                 {row.quantity}
                             </StyledTableCell>
                             <StyledTableCell align="right">{row.status}</StyledTableCell>
@@ -123,7 +140,7 @@ const Item = styled(Stack)(({ theme }) => ({
 
 function DirectionStack() {
     return (
-      <div>
+      <Stack spacing={0.5}>
         <Stack direction="row" sx={{alignItems: 'center'}}>
             <Typography sx={{fontWeight: 'medium'}}>Status:</Typography>
             <Item direction="row" spacing={1}>{icons.Open} <Typography>-</Typography> <Typography>Open</Typography></Item>
@@ -137,6 +154,6 @@ function DirectionStack() {
             <Item direction="row" spacing={1}>{portingArrows.Outgoing} <Typography>-</Typography> <Typography>Open</Typography></Item>
             <Item direction="row" spacing={1}>{portingArrows.Incoming} <Typography>-</Typography> <Typography>Open</Typography></Item>
         </Stack>
-      </div>
+      </Stack>
     );
 }
