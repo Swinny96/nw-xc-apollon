@@ -28,7 +28,7 @@ const Content = styled(Container)(({ theme }) => ({
       <Content maxWidth="lg" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <Outlet />
       </Content>
-      <TanStackRouterDevtools />
+      {/* <TanStackRouterDevtools /> */}
     </ThemeProvider>
   )
 }
