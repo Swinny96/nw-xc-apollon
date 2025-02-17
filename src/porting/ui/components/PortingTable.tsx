@@ -136,7 +136,7 @@ export default function PortingTable() {
 }
 
 const icons = {
-    Open: <HourglassTop fontSize='small' color='info'/>,
+    Open: <HourglassTop fontSize='small' color='warning'/>,
     Completed: <Verified fontSize='small' color='success'/>,
     Legacy: <TaskAlt fontSize='small' color='success'/>,
     Error: <ReportProblem fontSize='small' color='error'/>,
